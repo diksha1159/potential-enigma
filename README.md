@@ -1,4 +1,8 @@
+Let me be Honest Marvel is responsible for my curiosity in this AI Domain
 
+This project is a simple voice assistant named Jarvis, created using Python. It uses various libraries such as speech recognition, text-to-speech conversion, and web scraping to perform a range of actions, such as playing music, telling jokes, and searching for information on Wikipedia. The voice assistant is activated when the user says "Jarvis" and then listens to the user's commands. It then processes the command and responds to the user using text-to-speech. The project is a fun and engaging way to explore how AI and natural language processing work, and it can be easily customized to add more features and functionalities.
+
+and well as you've read this project is inspired by Jarvic from MCU
 
 Jarvis - A Simple Voice Assistant
 =================================
