@@ -7,6 +7,7 @@ import pyjokes
 import requests
 from bs4 import BeautifulSoup
 
+
 listener = sr.Recognizer()
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
@@ -51,45 +52,21 @@ def get_weather(city):
     except Exception as e:
         return f"Sorry, I couldn't fetch the weather information for {city}, is there anything else you would like me to do for you?."
 
-def get_news():
-    try:
-        # URL for Google News
-        # url = 'https://news.google.com/topstories?hl=en-US&gl=US&ceid=US:en'
+def NewsFromBBC():
+    query_params = {
+      "source": "bbc-news",
+      "sortBy": "top",
+      "apiKey": "1f20debee1e043e1bd935f8eac09d02c"
+    }
+    main_url = " https://newsapi.org/v1/articles"
+    res = requests.get(main_url, params=query_params)
+    open_bbc_page = res.json()
+    article = open_bbc_page["articles"]
+    results = []
+    for ar in article:
+        results.append(ar["title"])
+    return results
 
-        url='https://www.bbc.com/news'
-        # response = requests.get(url)
-
-        
-        # Make an HTTP request to fetch the news headlines
-        response = requests.get(url)
-        
-        soup = BeautifulSoup(response.text, 'html.parser') 
-        headlines = soup.find('body').find_all('h3') 
-        #for x in headlines: 
-	    #    print(x.text.strip())
-
-        #soup = BeautifulSoup(response.text, 'html.parser') 
-        #headlines = soup.find('body').find_all('h3') 
-        news_headlines = '\n'.join([headline.text.strip() for headline in headlines])
-        
-        return news_headlines
-    except Exception as e:
-        return "Sorry, I couldn't fetch the latest news headlines."
-
-
-        # Parse the HTML content of the response
-        # soup = BeautifulSoup(response.text, 'html.parser')
-        
-        # Extract the news headlines from the parsed HTML
-        # headlines = soup.find_all('h3', class_='ipQwMb ekueJc RD0gLb')
-        
-        # Format the headlines into a string
-        news_headlines = '\n'.join([headline.text for headline in headlines])
-        
-        # Return the news headlines
-        return news_headlines
-    except Exception as e:
-        return "Sorry, I couldn't fetch the latest news headlines."
 
 def run_jarvis():
     command = take_command()
@@ -121,8 +98,9 @@ def run_jarvis():
         talk(weather_info)
     elif 'news' in command:
         talk("Here are the latest news headlines.")
-        news_headlines = get_news()
-        talk(news_headlines)
+        news_headlines = NewsFromBBC()
+        for headline in news_headlines:
+            talk(headline)
     else:
         talk('Please say the command again.')
 
@@ -131,5 +109,4 @@ talk("Hi, I am Jarvis. How can I assist you today?")
 while True:
     run_jarvis()
 
-
-# okay debuging, argh idk what to do 
+ 
