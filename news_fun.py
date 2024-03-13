@@ -66,8 +66,11 @@
 	
 # 	# function call
 # 	NewsFromBBC() 
-from newsapi import NewsApiClient
+# apparenlty a prb with this stmt 
+# from newsapi import NewsApiClient
 import pycountry
+from newsapi.newsapi_client import NewsApiClient
+
 
 # you have to get your api key from newapi.com and then paste it below
 newsapi = NewsApiClient(api_key='1f20debee1e043e1bd935f8eac09d02c')
